@@ -9,10 +9,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="../styles/styles.css">
+  <script src="../Scripts/index.js"></script>
 </head>
 
 <body>
-
+  <!-- Navbar -->
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -31,7 +32,8 @@
           <li><a href="#">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li> <a href="./registration.html">Register</a></li>
         </ul>
       </div>
     </div>
@@ -73,7 +75,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
+  <!-- Category navbar -->
   <h3 align="center">What We Do</h3><br>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
@@ -84,49 +86,40 @@
         <tbody>
           <tr>
             <td>
-              <a href="#">Computers</a>
+              <a id="computers" onclick="getProducts('#computers')">Computers</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a href="#">Mobile phones</a>
+              <a id="mobiles" onclick="getProducts('#mobiles')">Mobile phones</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a href="#">Accessories</a>
+              <a id="accessories" onclick="getProducts('#accessories')">Accessories</a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div style="margin-left: auto" class="col-sm-10">
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
+
+      <!-- Product images, to be added in javascript -->
+      <div id="products-parent" style="margin-left: auto" class="col-sm-10">
+      
+      <?php>
+        
+        try{
+          $conn = new PDO("mysql:host=localhost;dbname=online_shop", "root", "");
+          $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+          
+        }
+      
+      ?>  
+      
+      
+      
       </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-    </div>
 
   </div>
   </div><br>
