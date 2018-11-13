@@ -9,7 +9,6 @@ CREATE TABLE users (
     date_of_birth       DATE,
     user_image_path     VARCHAR(255),
     user_type           VARCHAR(5) DEFAULT 'user',  -- Change to admin when inserting data
-    user_name           VARCHAR(30) NOT NULL,
     email               VARCHAR(50) NOT NULL,
     password_hash       VARCHAR(255) NOT NULL,
 
@@ -49,7 +48,7 @@ CREATE TABLE orders (
 
 
 -- Users
-INSERT INTO users (user_type, user_name, email, password_hash) VALUES('admin', 'admin', 'admin@rights.com', 'admin');
+INSERT INTO users (user_type, email, password_hash) VALUES('admin', 'admin@rights.com', 'admin');
 INSERT INTO users (user_name, email, password_hash) VALUES('user', 'user@scrub.com', 'user');
 
 -- Products
