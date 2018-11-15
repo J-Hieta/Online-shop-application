@@ -2,17 +2,18 @@
 <html lang="en">
 
 <head>
-  <title>Bootstrap Example</title>
+  <title>Online store</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="../Styles/styles.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <script src="../Scripts/index.js"></script>
 </head>
 
 <body>
-
+  <!-- Navbar -->
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -31,7 +32,8 @@
           <li><a href="#">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li> <a href="./registration.html">Register</a></li>
         </ul>
       </div>
     </div>
@@ -73,8 +75,8 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-  <h3 align="center">What We Do</h3><br>
+  <!-- Category navbar -->
+  <h3 align="center">Products</h3><br>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
       <table class="table table-striped table-bordered">
@@ -84,55 +86,72 @@
         <tbody>
           <tr>
             <td>
-              <a href="#">Computers</a>
+              <a value="computers" id="computers" onclick="getProducts('#computers')">computers</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a href="#">Mobile phones</a>
+              <a value="Phones" id="Phones" onclick="getProducts('#Phones')">Mobile phones</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a href="#">Accessories</a>
+              <a id="Accessories" onclick="getProducts('#Accessories')">Accessories</a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div style="margin-left: auto" class="col-sm-10">
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
-      <div style="padding-right: 1px" class="col-sm-5">
-        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        <h3>Product name</h3>
-        <p>Product price</p>
-      </div>
+
+      <!-- Product images, to be added in javascript -->
+      <div id="products-parent" style="margin-left: auto" class="col-sm-10">
+      <?php
+        $category = "";
+          if(isset($_GET['category'])) {
+            $category = sanitize($_GET['category']);
+          }
+
+          function sanitize($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        
+        try{
+          $db="online_shop";
+          $host="localhost";
+          $user="root";
+          $pwd="";
+          $test = "computers";
+          $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
+          $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+          $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
+          
+          $id = 0;
+          foreach($pProduct as $product) {
+            echo '<div style="padding-right: 1px" class="col-sm-5">
+            <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+            <h3>'.$product['product_name'].'</h3><p>'.$product['product_price'].'</p></div>';
+            $id = $id+1;
+          }
+          
+          
+        }
+        catch(PDOException $e) {
+          echo "Connect failed " . $e->getMessage();
+
+        }
+        
+      ?>  
+      
+            
     </div>
 
   </div>
   </div><br>
 
   <footer class="container-fluid text-center">
-    <p>Footer Text</p>
   </footer>
 
 </body>

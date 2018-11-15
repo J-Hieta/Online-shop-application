@@ -22,6 +22,7 @@ CREATE TABLE products (
     product_description VARCHAR(255) NOT NULL,
     category            VARCHAR(30),
     product_image_path  VARCHAR(255),
+    product_price       INT NOT NULL,
     in_stock            SMALLINT NOT NULL,
 
     PRIMARY KEY(product_id)
