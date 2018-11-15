@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Bootstrap Example</title>
+  <title>Online store</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -76,7 +76,7 @@
     </a>
   </div>
   <!-- Category navbar -->
-  <h3 align="center">What We Do</h3><br>
+  <h3 align="center">Products</h3><br>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
       <table class="table table-striped table-bordered">
@@ -86,17 +86,17 @@
         <tbody>
           <tr>
             <td>
-              <a id="computers" onclick="getProducts('#computers')">Computers</a>
+              <a value="computers" id="computers" onclick="getProducts('#computers')">computers</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a id="mobiles" onclick="getProducts('#mobiles')">Mobile phones</a>
+              <a value="Phones" id="Phones" onclick="getProducts('#Phones')">Mobile phones</a>
             </td>
           </tr>
           <tr>
             <td>
-              <a id="accessories" onclick="getProducts('#accessories')">Accessories</a>
+              <a id="Accessories" onclick="getProducts('#Accessories')">Accessories</a>
             </td>
           </tr>
         </tbody>
@@ -105,27 +105,53 @@
 
       <!-- Product images, to be added in javascript -->
       <div id="products-parent" style="margin-left: auto" class="col-sm-10">
-      
-      <?php>
+      <?php
+        $category = "";
+          if(isset($_GET['category'])) {
+            $category = sanitize($_GET['category']);
+          }
+
+          function sanitize($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
         
         try{
-          $conn = new PDO("mysql:host=localhost;dbname=online_shop", "root", "");
+          $db="online_shop";
+          $host="localhost";
+          $user="root";
+          $pwd="";
+          $test = "computers";
+          $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
           $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
+          $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
+          
+          $id = 0;
+          foreach($pProduct as $product) {
+            echo '<div style="padding-right: 1px" class="col-sm-5">
+            <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+            <h3>'.$product['product_name'].'</h3><p>'.$product['product_price'].'</p></div>';
+            $id = $id+1;
+          }
+          
           
         }
-      
+        catch(PDOException $e) {
+          echo "Connect failed " . $e->getMessage();
+
+        }
+        
       ?>  
       
-      
-      
-      </div>
+            
+    </div>
 
   </div>
   </div><br>
 
   <footer class="container-fluid text-center">
-    <p>Footer Text</p>
   </footer>
 
 </body>
