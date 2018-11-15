@@ -56,11 +56,37 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
                 <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
             </div>
         </form>
-        <div class="text-center">Already have an account? <a href="login.html">Sign in</a></div>
+        <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
     </div>
     <?php
-        $formError = [];
         $first_name = $last_name = $email = $password = '';
+        
+        $servername = 'localhost';
+        $username = 'root';
+        $password_db = '';
+        $dbname = 'online_shop';
+        
+        // Connect to DB 
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password_db);
+            // Change error to exception and handle it
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            // Prepare insert statement straight away
+            $insert = $conn->prepare('INSERT INTO users (first_name, last_name, email, password_hash)
+                                      VALUES (:first_name, :last_name, :email, :password_hash)');
+            $insert->bindParam(':first_name', $first_name);
+            $insert->bindParam(':last_name', $last_name);
+            $insert->bindParam(':email', $email);
+            // Hash password before storing it
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $insert->bindParam(':password_hash', $password_hash);
+            
+        } 
+        catch (PDOException $e) {
+            // Let user know something is wrong
+            echo "<script type='text/javascript'>alert('Connection failed: $e->getMessage()');</script>";
+        }
         
         function test_input($data) {
             $data = trim($data);              // Trims whitespace around
@@ -78,9 +104,9 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             $email = test_input($_POST['email']);
             $password = test_input($_POST['password']);
             
-            // Connect to DB 
-            
             // Send new user to DB
+            $insert->execute();
+            
         }
     ?>
 </body>
