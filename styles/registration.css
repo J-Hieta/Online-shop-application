@@ -5,12 +5,13 @@ body {
 }
 
 .form-control {
-    height: 40px;
-    box-shadow: none;
+    /* height: 40px; */
+    /* box-shadow: none; */
     color: #969fa4;
 }
 
 .form-control:focus {
+    /* Change to green borders when clicked */
     border-color: #5cb85c;
 }
 
@@ -95,14 +96,6 @@ body {
 }
 
 .signup-form a:hover {
+    /* On hover, remove underline, making site more interactive */
     text-decoration: none;
-}
-
-.signup-form form a {
-    color: #5cb85c;
-    text-decoration: none;
-}
-
-.signup-form form a:hover {
-    text-decoration: underline;
 }
