@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../Scripts/login.js"></script>
     <link rel="stylesheet" href="../Styles/registration.css">
+    
+    <?php 
+    include_once '../Scripts/connection.php';
+    include_once '../Scripts/sanitization.php';
+    ?>
 </head>
 
 <!-- All textual <input>, <textarea>, and <select> elements with class .form-control have a width of 100%. -->
@@ -18,9 +24,15 @@
 Wrap labels and form controls in <div class="form-group"> (needed for optimum spacing)
 Add class .form-control to all textual <input>, <textarea>, and <select> elements -->
 
-<body>
+<body onload="fromRegistration('<?php echo test_input($_GET['message'])?>')">
+    <!-- If user was redirected after registration. Show success message -->
+    <div class="collapse" id="success_alert">
+        <div class="alert alert-success text-center center-block" role="alert" style="width: 99%; margin-top: 2px;">
+            Registered Successfully!
+        </div>
+    </div>
     <div class="signup-form">
-        <form action="PHP file for registration" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <h2>Login</h2><br>
             <!-- Username -->
             <div class="form-group">
