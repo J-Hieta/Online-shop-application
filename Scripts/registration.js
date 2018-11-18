@@ -1,7 +1,7 @@
 let password;
 let password_confirm;
 
-function check_passwords() {
+function checkPasswords() {
     password = document.getElementById('password');
     password_confirm = document.getElementById('password_confirm');
 

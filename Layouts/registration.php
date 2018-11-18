@@ -49,7 +49,7 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
 
             <!-- Confirm password -->
             <div class="form-group">
-                <input type="password" class="form-control" name="confirm_password" id="password_confirm" placeholder="Confirm Password" onfocusout="check_passwords()" required>
+                <input type="password" class="form-control" name="confirm_password" id="password_confirm" placeholder="Confirm Password" onfocusout="checkPasswords()" required>
             </div>
 
             <div class="form-group">
@@ -59,17 +59,10 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
         <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
     </div>
     <?php
-    // Connect to DB
     include_once '../Scripts/connection.php';
+    include_once '../Scripts/sanitization.php';
     
     $first_name = $last_name = $email = $password = '';
-    
-    function test_input($data) {
-        $data = trim($data);              // Trims whitespace around
-        $data = stripslashes($data);      // Removes / and \
-        $data = htmlspecialchars($data);  // Disables code injections
-        return $data;
-    }
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { // On submission
         
@@ -83,10 +76,7 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
         // Returns record with matching email
         $account_exists = $conn->query("SELECT * FROM users WHERE email LIKE '$email'");
         
-        if ($account_exists->rowCount() > 0) {
-            echo "<script>alert('Account with that email already exists');</script>";
-        }
-        else {
+        if ($account_exists->rowCount() === 0) {
             // Prepare insert statement
             $insert = $conn->prepare('INSERT INTO users (first_name, last_name, email, password_hash)
                                     VALUES (:first_name, :last_name, :email, :password_hash)');
@@ -99,6 +89,12 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             
             // Send new user to DB
             $insert->execute();
+            
+            // Redirect user to login page
+            header('Location: ../Layouts/login.php?message=successful');
+        }
+        else {
+            echo "<script>alert('Account with that email already exists');</script>";
         }
     }
     ?>
