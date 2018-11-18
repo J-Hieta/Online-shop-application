@@ -59,22 +59,37 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
         <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
     </div>
     <?php
-        $first_name = $last_name = $email = $password = '';
+    // Connect to DB
+    include_once '../Scripts/connection.php';
+    
+    $first_name = $last_name = $email = $password = '';
+    
+    function test_input($data) {
+        $data = trim($data);              // Trims whitespace around
+        $data = stripslashes($data);      // Removes / and \
+        $data = htmlspecialchars($data);  // Disables code injections
+        return $data;
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') { // On submission
         
-        $servername = 'localhost';
-        $username = 'root';
-        $password_db = '';
-        $dbname = 'online_shop';
+        // Since js/jquery handles the validation, php assumes everything is in order and just handles db actions
+        // Sanitize input
+        $first_name = test_input($_POST['first_name']);
+        $last_name = test_input($_POST['last_name']);
+        $email = test_input($_POST['email']);
+        $password = test_input($_POST['password']);
         
-        // Connect to DB 
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password_db);
-            // Change error to exception and handle it
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            // Prepare insert statement straight away
+        // Returns record with matching email
+        $account_exists = $conn->query("SELECT * FROM users WHERE email LIKE '$email'");
+        
+        if ($account_exists->rowCount() > 0) {
+            echo "<script>alert('Account with that email already exists');</script>";
+        }
+        else {
+            // Prepare insert statement
             $insert = $conn->prepare('INSERT INTO users (first_name, last_name, email, password_hash)
-                                      VALUES (:first_name, :last_name, :email, :password_hash)');
+                                    VALUES (:first_name, :last_name, :email, :password_hash)');
             $insert->bindParam(':first_name', $first_name);
             $insert->bindParam(':last_name', $last_name);
             $insert->bindParam(':email', $email);
@@ -82,32 +97,10 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             $insert->bindParam(':password_hash', $password_hash);
             
-        } 
-        catch (PDOException $e) {
-            // Let user know something is wrong
-            echo "<script type='text/javascript'>alert('Connection failed: $e->getMessage()');</script>";
-        }
-        
-        function test_input($data) {
-            $data = trim($data);              // Trims whitespace around
-            $data = stripslashes($data);      // Removes / and \
-            $data = htmlspecialchars($data);  // Disables code injections
-            return $data;
-        }
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') { // On submission
-            
-            // Since js/jquery handles the validation, php assumes everything is in order and just handles db actions
-            // Sanitize input
-            $first_name = test_input($_POST['first_name']);
-            $last_name = test_input($_POST['last_name']);
-            $email = test_input($_POST['email']);
-            $password = test_input($_POST['password']);
-            
             // Send new user to DB
             $insert->execute();
-            
         }
+    }
     ?>
 </body>
 
