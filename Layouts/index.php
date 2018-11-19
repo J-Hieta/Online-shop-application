@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../Styles/styles.css">
   <script src="../Scripts/index.js"></script>
 </head>
 
@@ -22,18 +22,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="">Logo</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Contact</a></li>
+          <li class="active"><a href="">Home</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Projects</a></li>
+          <li><a href="">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li> <a href="./registration.html">Register</a></li>
+          <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li> <a href="./registration.php">Register</a></li>
         </ul>
       </div>
     </div>

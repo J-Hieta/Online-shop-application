@@ -50,11 +50,11 @@ CREATE TABLE orders (
 
 -- Users
 INSERT INTO users (user_type, email, password_hash) VALUES('admin', 'admin@rights.com', 'admin');
-INSERT INTO users (user_name, email, password_hash) VALUES('user', 'user@scrub.com', 'user');
+INSERT INTO users (email, password_hash) VALUES('user@scrub.com', 'user');
 
 -- Products
-INSERT INTO products (product_name, product_description, category, in_stock) VALUES('Computer', 'Fastest there is', 'Computers', '2');
-INSERT INTO products (product_name, product_description, category, in_stock) VALUES('Phone', 'Smart as duck', 'Phones', '25');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Computer', 'Fastest there is', 1500, 'Computers', '2');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Phone', 'Smart as duck', 799, 'Phones', '25');
 
 -- Orders
 INSERT INTO orders (order_amount, product_id, user_id) VALUES(2, 2, 2);

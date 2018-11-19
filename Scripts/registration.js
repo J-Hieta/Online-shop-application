@@ -1,12 +1,12 @@
 let password;
 let password_confirm;
 
-function check_passwords() {
-    console.log("checking passwords");
-    password = $('#password');
-    password_confirm = $('#password_confirm');
+function checkPasswords() {
+    password = document.getElementById('password');
+    password_confirm = document.getElementById('password_confirm');
+
     // Check that passwords match. If not, inform user
-    if (password.value() !== password_confirm.value()) {
+    if (password.value !== password_confirm.value) {
         password_confirm.setCustomValidity('Passwords do not match');
     }
     else {
