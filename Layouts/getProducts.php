@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,34 +13,25 @@
 </head>
 
 <body>
+
+    <?php include 'navbar.php'; ?>
     <div align="Center">
         <h2>Search results</h2>
 
         <?php
+        include_once "../Scripts/connection.php";
+        include_once "../Scripts/sanitization.php";
         $category = "";
         $input = "";
           if(isset($_GET['category'])) {
-            $category = sanitize($_GET['category']);
+            $category = test_input($_GET['category']);
           }
 
           if (isset($_GET['input'])) {
-              $input = sanitize($_GET['input']);
+              $input = test_input($_GET['input']);
           }
-
-          function sanitize($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
         
-        try{
-          $db="online_shop";
-          $host="localhost";
-          $user="root";
-          $pwd="";
-          $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
-          $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+         try {
           $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category' and product_name like '%$input%'");
           
           foreach($pProduct as $product) {

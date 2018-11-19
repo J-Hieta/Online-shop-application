@@ -54,6 +54,7 @@ INSERT INTO users (email, password_hash) VALUES('user@scrub.com', 'user');
 
 -- Products
 INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Computer', 'Fastest there is', 1500, 'Computers', '2');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Another Computer', 'Not as fast', 800, 'Computers', '5');
 INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Phone', 'Smart as duck', 799, 'Phones', '25');
 
 -- Orders

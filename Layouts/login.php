@@ -1,3 +1,47 @@
+<?php 
+    include_once '../Scripts/sanitization.php';
+    $connect = mysqli_connect("localhost", "root", "", "online_shop");
+    session_start();
+
+    $message = "";
+    try {
+        if(isset($_POST["login"])) {
+            if(empty($_POST["email"]) || empty($_POST["password"])) {
+                $message = '<script>alert("please enter both email and password")</script>';
+            }
+            else {
+                $email = mysqli_real_escape_string($connect, $_POST["email"]);
+                $password = mysqli_real_escape_string($connect, $_POST["password"]);
+                $login = "SELECT * FROM users WHERE email = '$email'";
+                $result = mysqli_query($connect, $login);
+                
+                if(mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_array($result)) {
+   
+                        if(password_verify($password, $row["password_hash"])) {
+                            $_SESSION['loggedin'] = true;
+                            $_SESSION["email"] = $email;
+                            header("location: index.php");
+                        }
+                        else 
+                        {
+                            $message = '<script>alert("Invalid username or password")</script>';
+                        }
+                    }
+                } 
+                else 
+                {
+                    $message = '<script>alert("Invalid username or password")</script>';
+                }
+            }
+
+        }
+    } catch(PDOexception $error) {
+        $message = $error->getMessage();
+    }
+
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +57,7 @@
     <script src="../Scripts/login.js"></script>
     <link rel="stylesheet" href="../Styles/registration.css">
     
-    <?php 
-    include_once '../Scripts/connection.php';
-    include_once '../Scripts/sanitization.php';
-    ?>
+
 </head>
 
 <!-- All textual <input>, <textarea>, and <select> elements with class .form-control have a width of 100%. -->
@@ -36,7 +77,7 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             <h2>Login</h2><br>
             <!-- Username -->
             <div class="form-group">
-                <input type="text" class="form-control" name="first_name" placeholder="Username" required>
+                <input type="text" class="form-control" name="email" placeholder="Email" required>
             </div>
 
             <!-- Password -->
@@ -45,10 +86,15 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Log in</button>
+                <button type="submit" name="login" class="btn btn-success btn-lg btn-block">Log in</button>
             </div>
         </form>
     </div>
+    <?php
+        if(isset($message)) {
+            echo '<label class="text-danger">'.$message.'</label>';
+        }
+    ?>
 </body>
 
 </html>

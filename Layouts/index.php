@@ -1,3 +1,24 @@
+<?php
+include_once "../Scripts/connection.php";
+include_once "../Scripts/sanitization.php";
+session_start();
+//Get category from url
+ $category = "";
+   if(isset($_GET['category'])) {
+     $category = test_input($_GET['category']);
+   }
+
+try{
+  //Look for products with specified category
+  $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
+   
+}
+catch(PDOException $e) {
+  echo "Connect failed " . $e->getMessage();
+
+}
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,30 +35,7 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="">Logo</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="">Home</a></li>
-          <li><a href="">About</a></li>
-          <li><a href="">Projects</a></li>
-          <li><a href="">Contact</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li> <a href="./registration.php">Register</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <?php include 'navbar.php'; ?>
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -102,7 +100,7 @@
         <tbody>
           <tr>
             <td>
-              <a value="computers" id="computers" onclick="getProducts('#computers')">computers</a>
+              <a value="computers" id="computers" onclick="getProducts('#computers')">Computers</a>
             </td>
           </tr>
           <tr>
@@ -121,54 +119,17 @@
 
       <!-- Product images, to be added in javascript -->
       <div id="products-parent" style="margin-left: auto" class="col-sm-10">
-      <?php
-        $category = "";
-          if(isset($_GET['category'])) {
-            $category = sanitize($_GET['category']);
-          }
-
-          function sanitize($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-        
-        try{
-          $db="online_shop";
-          $host="localhost";
-          $user="root";
-          $pwd="";
-          $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
-          $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-          $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
-          
+        <?php
           // Create elements for each product found
           foreach($pProduct as $product) {
             echo '<div style="padding-right: 1px" class="col-sm-5">
             <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
             <h3>'.$product['product_name'].'</h3><p>'.$product['product_price'].'</p></div>';
-            $id = $id+1;
           }
-          
-          
-        }
-        catch(PDOException $e) {
-          echo "Connect failed " . $e->getMessage();
-
-        }
-        
-      ?>  
-      
-            
+        ?>
     </div>
-
   </div>
   </div><br>
-
-  <footer class="container-fluid text-center">
-  </footer>
-
 </body>
 
 </html>
