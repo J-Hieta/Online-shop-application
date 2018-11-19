@@ -75,8 +75,24 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <!-- Category navbar -->
+  
   <h3 align="center">Products</h3><br>
+  <div align="center" style="padding: 5px" class="search">
+
+  <!-- Advanced search -->
+  <div>
+    <input id="search-input" type="text">
+    <select name="search-category" id="search-category">
+        <option value="">Select category</option>
+        <option value="computers">Computers</option>
+        <option value="phones">Phones</option>
+        <option value="accessories">Accessories</option>
+      </select>
+    <button onclick="searchProducts()">Search</button>
+  </div>
+  
+  <!-- Category navbar -->
+  </div>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
       <table class="table table-striped table-bordered">
@@ -123,12 +139,11 @@
           $host="localhost";
           $user="root";
           $pwd="";
-          $test = "computers";
           $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
           $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
           $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
           
-          $id = 0;
+          // Create elements for each product found
           foreach($pProduct as $product) {
             echo '<div style="padding-right: 1px" class="col-sm-5">
             <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
