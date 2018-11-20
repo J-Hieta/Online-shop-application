@@ -12,9 +12,6 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="">About</a></li>
-          <li><a href="">Projects</a></li>
-          <li><a href="">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
            <?php
@@ -26,7 +23,7 @@
                     
                     $fname = $conn->query("SELECT first_name from users where email = '".$_SESSION['email']."' LIMIT 1");
                     foreach($fname as $name){ 
-                        echo '<h4 style="color:white">Welcome '.$name['first_name'].'</h4>';
+                        echo '<li><h4 style="color:white">Welcome '.$name['first_name'].'</h4></li>';
                     }
 
                     echo '<li><a href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>

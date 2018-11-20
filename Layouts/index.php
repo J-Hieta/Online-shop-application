@@ -7,16 +7,9 @@ session_start();
    if(isset($_GET['category'])) {
      $category = test_input($_GET['category']);
    }
-
-try{
   //Look for products with specified category
   $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
    
-}
-catch(PDOException $e) {
-  echo "Connect failed " . $e->getMessage();
-
-}
 ?> 
 
 <!DOCTYPE html>
@@ -86,6 +79,9 @@ catch(PDOException $e) {
         <option value="phones">Phones</option>
         <option value="accessories">Accessories</option>
       </select>
+      <input id="min-price" type="text" placeholder="min price" size="5" maxlength="5">
+      -
+      <input id="max-price" type="text" placeholder="max price" size="5" maxlength="5">
     <button onclick="searchProducts()">Search</button>
   </div>
   
@@ -120,12 +116,7 @@ catch(PDOException $e) {
       <!-- Product images, to be added in javascript -->
       <div id="products-parent" style="margin-left: auto" class="col-sm-10">
         <?php
-          // Create elements for each product found
-          foreach($pProduct as $product) {
-            echo '<div style="padding-right: 1px" class="col-sm-5">
-            <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-            <h3>'.$product['product_name'].'</h3><p>'.$product['product_price'].'</p></div>';
-          }
+          include '../Scripts/getProducts.php';
         ?>
     </div>
   </div>
