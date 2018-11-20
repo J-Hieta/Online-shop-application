@@ -30,9 +30,9 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-6"><input type="text" class="form-control" name="first_name" title="Only letters allowed" 
-                    placeholder="First Name" pattern="^[A-Za-z�-� ,.'-]+$" required></div>
+                    placeholder="First Name" pattern="^[A-Za-zÀ-ÿ ,.'-]+$" required></div>
                     <div class="col-xs-6"><input type="text" class="form-control" name="last_name" title="Only letters allowed" 
-                    placeholder="Last Name" pattern="^[A-Za-z�-� ,.'-]+$" required></div>
+                    placeholder="Last Name" pattern="^[A-Za-zÀ-ÿ ,.'-]+$" required></div>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
 
             <!-- Password -->
             <div class="form-group">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{8,}$"
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*#?&]{8,}$"
                 title="Password must be at least 8 characters long and must have at least one upper case and one lower case letter" required>
             </div>
 
