@@ -14,5 +14,7 @@ function getProducts(categoryId) {
 function searchProducts() {
     let searchCategory = $("#search-category").val();
     let userInput = $("#search-input").val();
-    window.location.href = "../layouts/getProducts.php?category="+searchCategory+"&input="+userInput;  //Go to search result page with given parameters.
+    let minPrice = $("#min-price").val();
+    let maxPrice = $("#max-price").val();
+    window.location.href = "../layouts/searchResult.php?category="+searchCategory+"&input="+userInput+"&minP="+minPrice+"&maxP="+maxPrice;  //Go to search result page with given parameters.
 }

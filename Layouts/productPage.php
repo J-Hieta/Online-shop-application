@@ -1,3 +1,8 @@
+<?php 
+    include_once "../Scripts/connection.php";
+    include_once "../Scripts/sanitization.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +12,7 @@
     <title>Shop</title>
 </head>
 <body>
+<?php include "navbar.php"; ?>
     <h1>Product page</h1>
 </body>
 </html>

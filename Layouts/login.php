@@ -1,9 +1,10 @@
 <?php 
     include_once '../Scripts/sanitization.php';
-    $connect = mysqli_connect("localhost", "root", "", "online_shop");
+    $connect = mysqli_connect("localhost", "root", "", "online_shop"); //mysqli connect to database
     session_start();
 
     $message = "";
+    //Check if either field is empty
     try {
         if(isset($_POST["login"])) {
             if(empty($_POST["email"]) || empty($_POST["password"])) {
@@ -14,10 +15,10 @@
                 $password = mysqli_real_escape_string($connect, $_POST["password"]);
                 $login = "SELECT * FROM users WHERE email = '$email'";
                 $result = mysqli_query($connect, $login);
-                
+                //Proceed to verify password if login query returns data
                 if(mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_array($result)) {
-   
+                        //Verify entered password.
                         if(password_verify($password, $row["password_hash"])) {
                             $_SESSION['loggedin'] = true;
                             $_SESSION["email"] = $email;
