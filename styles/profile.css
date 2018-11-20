@@ -1,0 +1,31 @@
+.table td {
+    cursor: pointer;
+    text-align: center;
+}
+
+.img-rounded {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.left {
+    /* background-color: aqua; */
+}
+
+.left img {
+    /* Center image in div */
+    display: flex;
+    margin: 0 auto;
+    /* Now right side won't come on top of profile picture: */
+    height: 100%;
+    width: 100%;
+}
+
+.right {
+    /* background-color: brown; */
+}
+.row {
+    /* Using flex will automatically make rows to be the same height */
+    display: flex;
+    margin: 0 auto;
+}
