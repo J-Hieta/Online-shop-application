@@ -59,3 +59,5 @@ INSERT INTO products (product_name, product_description, product_price, category
 
 -- Orders
 INSERT INTO orders (order_amount, product_id, user_id) VALUES(2, 2, 2);
+INSERT INTO orders (order_amount, product_id, user_id) VALUES(6, 3, 2);
+INSERT INTO orders (order_amount, product_id, user_id, in_basket) VALUES(3, 1, 2, 'Y');
