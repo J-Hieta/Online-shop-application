@@ -10,5 +10,7 @@
         $last_name = $column['last_name'];
         $email = $column['email'];
         $dob = $column['date_of_birth'];
+        $image_path = $column['user_image_path'];
+        $password = $column['password_hash'];
     }
 ?>
