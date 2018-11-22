@@ -58,11 +58,46 @@
             <tr>
               <td onclick="showOrders()">Orders</td>
             </tr>
-            <tr>
-              <td onclick="uploadImage()">Change Profile Picture</td>
-            </tr>
           </tbody>
         </table>
+
+        <!-- Upload profile picture -->
+        <form action="../Scripts/uploadImage.php" method="post" enctype="multipart/form-data">
+
+          <!-- This button styling and logic to display chosen picture was borrowed from here: -->
+          <!-- https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3 -->
+          <!-- Own modifications: btn class used, input accept which works as filter -->
+          <div class="input-group">
+            <label class="input-group-btn">
+              <span class="btn btn-info">
+                Browse&hellip; <input type="file" style="display: none;" accept=".jpg, .jpeg, .png" name="profilePicture">
+              </span>
+            </label>
+            <input type="text" class="form-control" readonly>
+          </div><br>
+          <!-- End of borrowed code -->
+
+          <div class="row">
+            <label class="btn btn-primary">
+              Change Profile Picture
+              <button type="submit" name="submit" style="display: none;"></button>
+            </label>
+          </div>
+
+          <!-- <div class="row">
+            <label class="btn btn-info btn-file ">
+                Browse <input type="file" style="display: none;">
+            </label>
+          </div> -->
+          
+          <!-- <div class="form-group col-md-4">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Change Profile Picture</button>
+          </div> -->
+          <!-- <div class="form-group col-md-4">
+            <input type="file" class="btn btn-light btn-lg btn-block" name="fileToUpload" id="fileToUpload">
+          </div> -->
+          
+        </form>
       </div>
 
       <!-- Right side: Actual info, edit text fields etc -->
