@@ -149,6 +149,34 @@
                 <button type="submit" class="btn btn-success btn-lg btn-block">Update</button>
             </div>
         </form>
+
+        <!-- Orders. Hidden or shown on button click -->
+        <div id="orders_table">
+          <?php 
+            include_once '../Scripts/getOrders.php';
+          ?>
+        </div>
+        
+        <!-- <table id="orders_table">
+          <tr>
+            <th>Education</th>
+            <th>Year</th>
+            <th>Grade</th>
+          </tr>
+          <?php
+            // Fetch all user's orders
+            // $orders = $conn->query("SELECT * FROM orders WHERE user_id = '$user_id'");
+            $orders = $conn->query("SELECT * FROM orders WHERE user_id = 2");
+
+            foreach ($orders as $order) {
+                echo '<tr>';
+                echo '<td>'.$order['in_basket'].'</td>';
+                echo '<td>'.$order['order_amount'].'</td>';
+                echo '<td>'.$order['product_id'].'</td>';
+                echo '</tr>';
+            }
+          ?>
+        </table> -->
     </div>
 
         <?php

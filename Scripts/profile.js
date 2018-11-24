@@ -8,17 +8,16 @@ $('#date_picker').datepicker({
     maxDate: (new Date()),
 });
 
-// $('#user_form1').hide();
+$('#orders_table').hide();
 
 function showInfo() {
-    // $('#user_form1').hide();
+    $('#orders_table').hide();
     $('#user_form').show();
 }
 
 function showOrders() {
     $('#user_form').hide();
-    // $('#user_form1').show();
-    // Change right side to show user's orders
+    $('#orders_table').show();
 }
 
 

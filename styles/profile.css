@@ -30,6 +30,26 @@
     margin: 0 auto;
 }
 
+.orders table {
+    width: 60%;
+}
+  
+.orders th, .orders td {
+    border: 1px solid black;
+    overflow: hidden;
+    padding: 1%;
+    text-align: center;
+    width: 10%;
+}
+
+.orders td img {
+    max-height: 50px;
+}
+
+.orders a {
+    cursor: pointer;
+}
+
 /* .btn-info {
     position: relative;
     overflow: hidden;
