@@ -29,7 +29,7 @@
         
         // Allow image file formats
         if (!in_array($image_file_type, $file_types)) {
-            echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+            echo "Only JPG, JPEG & PNG files are allowed.";
             $upload_ok = 0;
         }
 
@@ -40,13 +40,13 @@
         
         // Check file size
         if ($image_size > 500000) {
-            echo "Sorry, your file is too large.";
+            echo "Your file is too large.";
             $upload_ok = 0;
         }
         
         // Check if $upload_ok is set to 0 by an error
         if ($upload_ok == 0) {
-            echo "Sorry, your file was not uploaded.";
+            echo " Your file was not uploaded.";
             // if everything is ok, try to upload file
         }
         else {
@@ -74,7 +74,7 @@
                 header('Location: ../Layouts/profile.php');
             } 
             else {
-                echo "Sorry, there was an error uploading your file.";
+                echo " There was an error uploading your file.";
             }
         }
     }
