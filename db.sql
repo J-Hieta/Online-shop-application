@@ -21,7 +21,7 @@ CREATE TABLE products (
     product_name        VARCHAR(30) NOT NULL,
     product_description VARCHAR(255) NOT NULL,
     category            VARCHAR(30),
-    product_image_path  VARCHAR(255),
+    product_image_path  VARCHAR(255) DEFAULT '../Resources/ProductImages/default.png',
     product_price       INT NOT NULL,
     in_stock            SMALLINT NOT NULL,
 
