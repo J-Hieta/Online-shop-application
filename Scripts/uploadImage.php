@@ -23,14 +23,14 @@
     $image_size      = $_FILES["profilePicture"]["size"];
     $image_temp_name = $_FILES['profilePicture']['tmp_name'];
     $db_path         = '..'.$images_dir.$user_id.'/'.$safe_file;                    // ../Resources/rest/path/to/image.jpg
-    $uploadOk = 1;
+    $upload_ok       = 1;
     
     if(isset($_POST["submit"])) {
         
         // Allow image file formats
         if (!in_array($image_file_type, $file_types)) {
             echo "Sorry, only JPG, JPEG & PNG files are allowed.";
-            $uploadOk = 0;
+            $upload_ok = 0;
         }
 
 //         // If file exists, remove it
@@ -41,16 +41,16 @@
         // Check file size
         if ($image_size > 500000) {
             echo "Sorry, your file is too large.";
-            $uploadOk = 0;
+            $upload_ok = 0;
         }
         
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
+        // Check if $upload_ok is set to 0 by an error
+        if ($upload_ok == 0) {
             echo "Sorry, your file was not uploaded.";
             // if everything is ok, try to upload file
         }
         else {
-            // Empty folder, restrictin personal pictures to 1, and add new picture
+            // Empty folder, restricting personal pictures to 1, and add new picture
             // Get a list of all of the file names in the folder.
             $files = glob($personal_dir.'/*');
             
