@@ -28,8 +28,8 @@
       </tr>
       <?php
         // Fetch all user's orders
-        // $orders = $conn->query("SELECT * FROM orders WHERE user_id = '$user_id'");
-        $orders = $conn->query("SELECT * FROM orders WHERE user_id = 2");
+         $orders = $conn->query("SELECT * FROM orders WHERE user_id = '$user_id'");
+        //$orders = $conn->query("SELECT * FROM orders WHERE user_id = 2");
 
         foreach ($orders as $order) {
             // Fetch each product's information

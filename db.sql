@@ -29,23 +29,23 @@ CREATE TABLE products (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE orders (
-    order_id            SMALLINT NOT NULL AUTO_INCREMENT,
-    in_basket           VARCHAR(1) DEFAULT 'N',     -- Change to Y when user adds item to basket
-    order_amount        SMALLINT,
-    product_id          SMALLINT,
-    user_id             SMALLINT,
-    PRIMARY KEY(order_id),
-    FOREIGN KEY(product_id)
-        REFERENCES product(product_id)
-        ON UPDATE CASCADE               -- When updated in products table, update this also
-        ON DELETE SET NULL,             -- If product is removed from selection, leave order visible to user
-    
-    FOREIGN KEY(user_id)
-        REFERENCES users(user_id)
-        ON UPDATE CASCADE               -- If user id gets updated, also update this
-        ON DELETE SET NULL              -- SET NULL because orders are saved for accounting
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+    CREATE TABLE orders (
+        order_id            SMALLINT NOT NULL AUTO_INCREMENT,
+        in_basket           VARCHAR(1) DEFAULT 'N',     -- Change to Y when user adds item to basket
+        order_amount        SMALLINT,
+        product_id          SMALLINT,
+        user_id             SMALLINT,
+        PRIMARY KEY(order_id),
+        FOREIGN KEY(product_id)
+            REFERENCES product(product_id)
+            ON UPDATE CASCADE               -- When updated in products table, update this also
+            ON DELETE SET NULL,             -- If product is removed from selection, leave order visible to user
+        
+        FOREIGN KEY(user_id)
+            REFERENCES users(user_id)
+            ON UPDATE CASCADE               -- If user id gets updated, also update this
+            ON DELETE SET NULL              -- SET NULL because orders are saved for accounting
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 -- Users
