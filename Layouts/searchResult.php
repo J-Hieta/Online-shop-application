@@ -20,7 +20,7 @@ $maxP = "";
       $maxP = test_input($_GET['maxP']);
   }
 
-  $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category' and product_name like '%$input%' and product_price >= '$minP' and product_price <= '$maxP'");
+  $pProduct = $conn->query("SELECT * from products WHERE category like '$category' and product_name like '%$input%' and product_price >= '$minP' and product_price <= '$maxP'");
   
 ?>
 <!DOCTYPE html>

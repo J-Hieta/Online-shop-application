@@ -8,7 +8,7 @@ session_start();
      $category = test_input($_GET['category']);
    }
   //Look for products with specified category
-  $pProduct = $conn->query("SELECT product_name, product_price from products WHERE category like '$category'");
+  $pProduct = $conn->query("SELECT * from products WHERE category like '$category'");
    
 ?> 
 
@@ -121,6 +121,7 @@ session_start();
     </div>
   </div>
   </div><br>
+ 
 </body>
 
 </html>
