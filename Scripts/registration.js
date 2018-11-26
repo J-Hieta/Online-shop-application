@@ -14,3 +14,20 @@ function checkPasswords() {
         password_confirm.setCustomValidity('');
     }
 }
+
+let password_new;
+let password_confirm_update;
+
+function checkPasswordsOnUpdate() {
+    password_new = document.getElementById('password_new');
+    password_confirm_update = document.getElementById('password_confirm_update');
+
+    // Check that passwords match. If not, inform user
+    if (password_new.value !== password_confirm_update.value) {
+        password_confirm_update.setCustomValidity('Passwords do not match');
+    }
+    else {
+        // Passwords match, reset alert to non-existent
+        password_confirm_update.setCustomValidity('');
+    }
+}

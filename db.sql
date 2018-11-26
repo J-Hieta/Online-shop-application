@@ -7,7 +7,7 @@ CREATE TABLE users (
     first_name          VARCHAR(30),
     last_name           VARCHAR(30),
     date_of_birth       DATE,
-    user_image_path     VARCHAR(255),
+    user_image_path     VARCHAR(255) DEFAULT '../Resources/UserImages/default.jpg',
     user_type           VARCHAR(5) DEFAULT 'user',  -- Change to admin when inserting data
     email               VARCHAR(50) NOT NULL,
     password_hash       VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE products (
     product_name        VARCHAR(30) NOT NULL,
     product_description VARCHAR(255) NOT NULL,
     category            VARCHAR(30),
-    product_image_path  VARCHAR(255),
+    product_image_path  VARCHAR(255) DEFAULT '../Resources/ProductImages/default.png',
     product_price       INT NOT NULL,
     in_stock            SMALLINT NOT NULL,
 
@@ -59,3 +59,5 @@ INSERT INTO products (product_name, product_description, product_price, category
 
 -- Orders
 INSERT INTO orders (order_amount, product_id, user_id) VALUES(2, 2, 2);
+INSERT INTO orders (order_amount, product_id, user_id) VALUES(6, 3, 2);
+INSERT INTO orders (order_amount, product_id, user_id, in_basket) VALUES(3, 1, 2, 'Y');
