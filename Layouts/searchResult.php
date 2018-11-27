@@ -43,7 +43,11 @@ $maxP = "";
         <h2>Search results</h2>
 
         <?php
-        include '../scripts/getProducts.php'
+        if($pProduct->rowCount() == 0) {
+            echo "<h3>Sorry, no results!</h3>";
+        }else {
+        include '../scripts/getProducts.php';
+    }
       ?>  
     </div>
 </body>

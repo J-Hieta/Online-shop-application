@@ -47,17 +47,16 @@ CREATE TABLE orders (
         ON DELETE SET NULL              -- SET NULL because orders are saved for accounting
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-
--- Users
-INSERT INTO users (user_type, email, password_hash) VALUES('admin', 'admin@rights.com', 'admin');
-INSERT INTO users (email, password_hash) VALUES('user@scrub.com', 'user');
-
 -- Products
-INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Computer', 'Fastest there is', 1500, 'Computers', '2');
-INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Another Computer', 'Not as fast', 800, 'Computers', '5');
-INSERT INTO products (product_name, product_description, product_price, category, in_stock) VALUES('Phone', 'Smart as duck', 799, 'Phones', '25');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Computer', 'Fastest there is', 1500, 'Computers', '2', '../resources/productImages/computer1.png');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Another Computer', 'Not as fast', 800, 'Computers', '5', '../resources/productImages/computer2.png');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Phone', 'Smart as duck', 799, 'Phones', '25', '../resources/productImages/phone1.png');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Retro Phone', 'Great for hipsters', 200, 'Phones', '4', '../resources/productImages/phone2.png');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Smart phone', 'Can run tinder', 999, 'Phones', '25', '../resources/productImages/phone3.png');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Retro Computer', 'Runs Doom on 60FPS', 400, 'Computers', '5','../resources/productImages/computer3.jpg');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Desktop PC', 'Nothing special about this', 900, 'Computers', '2', '../resources/productImages/computer4.jpg');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Keyboard', 'Great for typing', 20, 'Accessories', '50', '../resources/productImages/keyboard.jpg');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Mouse', 'Use this to click stuff', 15, 'Accessories', '10', '../resources/productImages/mouse.jpg');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('USB stick', 'You WILL lose this', 10, 'Accessories', '30', '../resources/productImages/usb.jpg');
+INSERT INTO products (product_name, product_description, product_price, category, in_stock, product_image_path) VALUES('Cable', 'Goes great with appropriate ports', 13, 'Accessories', '90', '../resources/productImages/cable.jpg');
 
--- Orders
-INSERT INTO orders (order_amount, product_id, user_id) VALUES(2, 2, 2);
-INSERT INTO orders (order_amount, product_id, user_id) VALUES(6, 3, 2);
-INSERT INTO orders (order_amount, product_id, user_id, in_basket) VALUES(3, 1, 2, 'Y');
