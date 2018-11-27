@@ -88,7 +88,12 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
             $insert->bindParam(':password_hash', $password_hash);
             
             // Send new user to DB
-            $insert->execute();
+            try {
+                $insert->execute();
+            }
+            catch(PDOException $e) {
+                // Error
+            }
             
             // Redirect user to login page
             header('Location: ../Layouts/login.php?message=successful');
