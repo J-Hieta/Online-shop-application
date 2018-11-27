@@ -9,7 +9,18 @@ session_start();
    }
   //Look for products with specified category
   $pProduct = $conn->query("SELECT * from products WHERE category like '$category'");
-   
+
+  if(isset($_POST['searchButton'])) {
+
+
+  if($_POST['searchButton'] == "submit") {
+    $input = $_POST['input'];
+    $searchCategory = $_POST['category'];
+    $minP = $_POST['minP'];
+    $maxP = $_POST['maxP'];
+
+  }
+}
 ?> 
 
 <!DOCTYPE html>
@@ -40,18 +51,18 @@ session_start();
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+        <img src="../resources/productImages/computer4.jpg" style="width:500px ; height:285px" alt="Image">
         <div class="carousel-caption">
-          <h3>Sell $</h3>
-          <p>Money Money.</p>
+          <h3>Desktop PC</h3>
+          <p>900€</p>
         </div>
       </div>
 
       <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <img src="../resources/productImages/keyboard.jpg" style="width:500px ; height:285px" alt="Image">
         <div class="carousel-caption">
-          <h3>More Sell $</h3>
-          <p>Lorem ipsum...</p>
+          <h3>Keyboard</h3>
+          <p>20€</p>
         </div>
       </div>
     </div>
@@ -71,25 +82,27 @@ session_start();
   <div align="center" style="padding: 5px" class="search">
 
   <!-- Advanced search -->
-  <div>
-    <input id="search-input" type="text">
-    <select name="search-category" id="search-category">
+  <form id="search" action="../Layouts/searchResult.php">
+  <div class="form input-group">
+    <input required name="input" value="" id="search-input" type="text">
+    <select required name="category" name="search-category" id="search-category">
         <option value="">Select category</option>
         <option value="computers">Computers</option>
         <option value="phones">Phones</option>
         <option value="accessories">Accessories</option>
       </select>
-      <input id="min-price" type="text" placeholder="min price" size="5" maxlength="5">
+      <input required name="minP" value="" id="min-price" type="text" placeholder="min price" size="5" maxlength="5">
       -
-      <input id="max-price" type="text" placeholder="max price" size="5" maxlength="5">
-    <button onclick="searchProducts()">Search</button>
+      <input required name="maxP" value="" id="max-price" type="text" placeholder="max price" size="5" maxlength="5">
+    <button id="search_button" class="btn btn-success" type="submit" name="searchButton" value="submit">Search</button>
   </div>
+  </form>
   
   <!-- Category navbar -->
   </div>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
-      <table class="table table-striped table-bordered">
+      <table class="table table-striped table-bordered table-inverse">
         <thead>
           <th>Categories</th>
         </thead>

@@ -6,10 +6,14 @@ include_once "../Scripts/sanitization.php";
 //     $userId = $conn->query("SELECT user_id from users where email = '".$_SESSION['email']."' LIMIT 1");
 //     $items = $conn->query("SELECT * from orders where in_basket = 'Y' and user_id = '$userId'");
 // }
-$uid = $conn->query("SELECT user_id FROM users where email = '".$_SESSION['email']."' LIMIT 1");
-foreach ($uid as $id){
-  $user_id = $id['user_id'];
+if(isset($_SESSION['email'])){
+  $uid = $conn->query("SELECT user_id FROM users where email = '".$_SESSION['email']."' LIMIT 1");
+  foreach ($uid as $id){
+    $user_id = $id['user_id'];
 } 
+
+}
+
 if(isset($_GET['action'])) {
 
   if($_GET['action'] == 'remove') {
@@ -79,8 +83,7 @@ if(isset($_GET['action'])) {
         if(isset($_SESSION['p_name'])) {
           for($i=0;$i<count($_SESSION['p_name']);$i++){
           echo "<tr>";
-          // echo "<div class='col-sm-4'>".$_SESSION['p_id'][$i]."</div>";
-          echo '<td><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></td>';
+          echo '<td><img src="'.$_SESSION['p_img'][$i].'" class="img-responsive" style="width:100px;height:100px%" alt="Image"></td>';
           echo "<td>".$_SESSION['p_name'][$i]." </td>";
           echo "<td>".$_SESSION['p_price'][$i]."€ </td>";
           echo "</tr>";
