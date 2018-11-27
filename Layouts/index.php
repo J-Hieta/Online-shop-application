@@ -14,11 +14,11 @@ session_start();
 
 
   if($_POST['searchButton'] == "submit") {
-    $input = $_POST['input'];
-    $searchCategory = $_POST['category'];
-    $minP = $_POST['minP'];
-    $maxP = $_POST['maxP'];
-
+    $input = test_input($_POST['input']);
+    $searchCategory = test_input($_POST['category']);
+    $minP = test_input($_POST['minP']);
+    $maxP = test_input($_POST['maxP']);
+    header("location: ../Layouts/searchresult.php?input=".$input."&category=".$searchCategory."&minP=".$minP."&maxP=".$maxP."");
   }
 }
 ?> 
@@ -82,7 +82,7 @@ session_start();
   <div align="center" style="padding: 5px" class="search">
 
   <!-- Advanced search -->
-  <form id="search" action="../Layouts/searchResult.php">
+  <form id="search" method="post">
   <div class="form input-group">
     <input required name="input" value="" id="search-input" type="text">
     <select required name="category" name="search-category" id="search-category">
