@@ -20,10 +20,53 @@ function showOrders() {
     $('#orders_table').show();
 }
 
+$(function() {
+    $('#user_form').submit(function(button) {
+        button.preventDefault();                        // Preven traditional submission
+
+        const fname = $('#first_name').val();
+        const lname = $('#last_name').val();
+        const e_mail = $('#email').val();
+        // const d_picker = $('#date_picker').val();
+        const pass_old = $('#password_old').val();
+        const pass_new = $('#password_new').val();
+
+        if ($(this).parsley().isValid()) {
+            $.ajax({
+                url: '../Scripts/updateUserInfo.php',
+                data: {
+                    first_name: fname,
+                    last_name: lname,
+                    email: e_mail,
+                    // date_picker: d_picker,
+                    password_old: pass_old,
+                    password_new: pass_new,
+                },
+                type: 'post',
+            })
+            .done (function(data) {
+                if (data  === "Wrong password") {
+                    alert('Invalid password');
+                }
+                else if(data === 'Success') {
+                    const success = $('#success_update');
+                    success.slideDown('slow');
+                    setTimeout(() => {
+                        success.slideUp('slow');
+                    }, 2500);
+                }
+                else {
+                    alert('data: ' + data);
+                }
+            })
+            .fail (function(data) {
+                alert('Error occured: ' + data);
+            })
+        }
+    });
 
 // Code found from:
 // https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
-$(function () {
 
     // We can attach the `fileselect` event to all file inputs on the page
     $(document).on('change', ':file', function () {
