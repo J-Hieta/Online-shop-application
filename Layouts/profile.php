@@ -152,6 +152,35 @@
           </div>
         </form>
 
+        <!-- Delete Button -->
+        <div class="form-group col-md-7">
+            <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#confirmation" id="deleting_button">
+              Delete
+            </button>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmation" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete User</h4>
+              </div>
+              <div class="modal-body">
+                <p>This action will remove current user completely. Are you sure?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="delete_button">Delete User</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
         <!-- Orders. Hidden or shown on button click -->
         <div id="orders_table" hidden>
           <?php 

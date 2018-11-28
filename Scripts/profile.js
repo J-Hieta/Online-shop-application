@@ -13,16 +13,19 @@ $('#orders_table').hide();
 function showInfo() {
     $('#orders_table').hide();
     $('#user_form').show();
+    $('#deleting_button').show();
 }
 
 function showOrders() {
     $('#user_form').hide();
+    $('#deleting_button').hide();
     $('#orders_table').show();
 }
 
 $(function() {
+    // UPDATE
     $('#user_form').submit(function(button) {
-        button.preventDefault();                        // Preven traditional submission
+        button.preventDefault();                        // Prevent traditional submission
 
         const fname = $('#first_name').val();
         const lname = $('#last_name').val();
@@ -44,7 +47,7 @@ $(function() {
                 },
                 type: 'post',
             })
-            .done (function(data) {
+            .done(function(data) {
                 if (data  === "Wrong password") {
                     alert('Invalid password');
                 }
@@ -56,13 +59,36 @@ $(function() {
                     }, 2500);
                 }
                 else {
-                    alert('data: ' + data);
+                    alert('data: ' + data);                     // For safety reasons this would get removed
                 }
             })
-            .fail (function(data) {
-                alert('Error occured: ' + data);
+            .fail(function(data) {
+                alert('Error occured when updating: ' + data);  // For safety reasons this would get removed
             })
         }
+    });
+
+    // DELETE
+    $('#delete_button').click(() => {
+        $.ajax({
+            url: '../Scripts/deleteUser.php',
+            type: 'post',
+        })
+        .done(function(data) {
+            if(data === 'Error') {
+                alert('Something went wrong when deleting user');
+            }
+            else if (data === 'Deleted') {
+                // Log out
+                window.location.replace('../Layouts/logout.php?deleted=true');
+            }
+            else {
+                alert('Error occured when deleting1: ' + data);        // For safety reasons this would get removed
+            }
+        })
+        .fail(function(data) {
+            alert('Error occured when deleting: ' + data);        // For safety reasons this would get removed
+        })
     });
 
 // Code found from:

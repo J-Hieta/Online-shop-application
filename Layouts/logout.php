@@ -16,7 +16,14 @@
 </head>
 
 <body>
-    <h2>Logged out succesfully. Redirecting in 5 seconds</h2>
+    <!-- If profile was deleted, change message -->
+    <?php 
+        $message = 'Logged out succesfully. Redirecting in 5 seconds';
+        if(isset($_GET['deleted'])) {
+            $message = 'Profile deleted successfully. Redirecting in 5 seconds';
+        }
+    ?>
+    <h2><?php echo $message; ?></h2>
     <script>    //Redirect to index page in 5 seconds.
         window.setTimeout(() => {
             window.location = "index.php?"; 
