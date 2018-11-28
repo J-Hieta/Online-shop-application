@@ -41,6 +41,11 @@
         $message = $error->getMessage();
     }
 
+    // If user is already logged in, redirect to main page
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+        header('location: ./index.php');
+    }
+
     ?>
 
 <!DOCTYPE html>
@@ -90,6 +95,12 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
                 <button type="submit" name="login" class="btn btn-success btn-lg btn-block">Log in</button>
             </div>
         </form>
+        <div class="text-center">
+            New user? 
+            <a href="registration.php">Register now!</a><br>
+            Or go back to
+            <a href="index.php">main page</a></div>
+        </div>
     </div>
     <?php
         if(isset($message)) {
