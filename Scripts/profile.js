@@ -1,12 +1,12 @@
 // No need for validation if the user can't choose wrong!
-$('#date_picker').datepicker({
-    changeMonth: true,
-    changeYear: true,
-    yearRange: '-150:+0',
-    dateFormat: 'dd/mm/yy',
-    minDate: (new Date(1890, 1, 1)),
-    maxDate: (new Date()),
-});
+// $('#date_picker').datepicker({
+//     changeMonth: true,
+//     changeYear: true,
+//     yearRange: '-150:+0',
+//     dateFormat: 'dd/mm/yy',
+//     minDate: (new Date(1890, 1, 1)),
+//     maxDate: (new Date()),
+// });
 
 $('#orders_table').hide();
 
