@@ -1,19 +1,4 @@
-$(document).ready(function(){
-
-    $.ajax({
-      
-      url:'../Scripts/addToCart.php',
-      data:{
-        total_cart_items:"itemsInCart"
-      },
-      type:'post',
-      success:function(response) {
-        document.getElementById("items_in_cart").value=response;
-      }
-    });
-});
-
-
+//Add an item to the cart
 function addToCart(id) {
 
     var product_id = $('#'+id).attr('id');
@@ -32,19 +17,4 @@ function addToCart(id) {
             alert('Item added!');
         }
     });
-}
-
-function goToCart()
-{
-    $.ajax({
-        url:'cart.php',
-        data:{
-            'showcart' : "cart"
-        },
-        type:'post',
-        success:function() {
-            window.location.href = "../Layouts/cart.php"
-        }
- });
-
 }

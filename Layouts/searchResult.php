@@ -48,6 +48,7 @@ if(isset($_GET['maxP'])  && $_GET['maxP'] !== '') {
     <div align="Center">
         <h2>Search results</h2>
 
+        <!-- Display results, if any are found -->
         <?php
         if($pProduct->rowCount() == 0) {
             echo "<h3>Sorry, no results!</h3>";

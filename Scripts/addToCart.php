@@ -3,12 +3,7 @@ include_once "../Scripts/connection.php";
 include_once "../Scripts/sanitization.php";
 session_start();
 
-if(isset($_POST['itemsInCart']))
-{
-    echo count($_SESSION['p_name']);
-    exit();
-}
-
+// Set the values posted from addtoCart.js to sessions.
 if(isset($_POST['product_image'])) {
 
     $_SESSION['p_name'][] = $_POST['product_name'];
