@@ -8,5 +8,7 @@ https://www.apachefriends.org/index.html
 No other setup is needed, but internet connection is necessary to make libraries work (project uses CDNs).
 
 Project members:
+
 Jussi Hieta     https://github.com/J-Hieta
+
 Atte Karppinen  https://github.com/AtteKarppinen
