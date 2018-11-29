@@ -6,6 +6,8 @@ $category = "";
 $input = "";
 $minP = "";
 $maxP = "";
+
+    //Sanitize inputs
   if(isset($_GET['category'])) {
     $category = test_input($_GET['category']);
   }
@@ -19,7 +21,7 @@ $maxP = "";
   if(isset($_GET['maxP'])) {
       $maxP = test_input($_GET['maxP']);
   }
-
+    //Get search results according to the parameters specified inURL
   $pProduct = $conn->query("SELECT * from products WHERE category like '$category' and product_name like '%$input%' and product_price >= '$minP' and product_price <= '$maxP'");
   
 ?>
@@ -42,6 +44,7 @@ $maxP = "";
     <div align="Center">
         <h2>Search results</h2>
 
+        <!-- Display results, if any are found -->
         <?php
         if($pProduct->rowCount() == 0) {
             echo "<h3>Sorry, no results!</h3>";

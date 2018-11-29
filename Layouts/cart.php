@@ -2,10 +2,7 @@
 session_start();
 include_once "../Scripts/connection.php";
 include_once "../Scripts/sanitization.php";
-// if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-//     $userId = $conn->query("SELECT user_id from users where email = '".$_SESSION['email']."' LIMIT 1");
-//     $items = $conn->query("SELECT * from orders where in_basket = 'Y' and user_id = '$userId'");
-// }
+
 if(isset($_SESSION['email'])){
   $uid = $conn->query("SELECT user_id FROM users where email = '".$_SESSION['email']."' LIMIT 1");
   foreach ($uid as $id){
@@ -25,7 +22,7 @@ if(isset($_GET['action'])) {
       echo '<script>window.location="cart.php"</script>'; 
   }
   if($_GET['action'] == 'order') { 
-    //Insert to orders code here
+    //Insert orders into database. Each item will appear as a separate order.
     for($c = 0 ; $c < count($_SESSION['p_name']) ; $c++) {
       $conn->query("SET foreign_key_checks = 0");
       $pid = $_SESSION['p_id'][$c];
@@ -76,11 +73,8 @@ if(isset($_GET['action'])) {
           <th>Name</th>
           <th>Price</th>
         </thead>";
-        }
-      ?>
-      <?php
         $totalPrice = 0;
-        if(isset($_SESSION['p_name'])) {
+          //Create elements for each product in cart.
           for($i=0;$i<count($_SESSION['p_name']);$i++){
           echo "<tr>";
           echo '<td><img src="'.$_SESSION['p_img'][$i].'" class="img-responsive" style="width:100px;height:100px%" alt="Image"></td>';
@@ -105,14 +99,14 @@ if(isset($_GET['action'])) {
     <br>
 
     <div class="row" align="center">
+    <!-- Create an appropriate button if the user is logged in or not. -->
     <?php if(isset($_SESSION['loggedin'])) {
       echo "<a class='btn btn-success' href='../Layouts/cart.php?action=order'>Place order</a>";
     }
     else {
       echo "<a class='btn btn-danger' href='../Layouts/login.php'>Log in to order</a>";
     }
-    ?>
-      
+    ?>      
       <a class='btn btn-warning' href='../Layouts/cart.php?action=remove'>Clear cart</a> 
     </div>
     

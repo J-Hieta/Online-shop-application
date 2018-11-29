@@ -90,6 +90,7 @@ Add class .form-control to all textual <input>, <textarea>, and <select> element
                 <button type="submit" name="login" class="btn btn-success btn-lg btn-block">Log in</button>
             </div>
         </form>
+        <div class="text-center">Don't have an account? <a href="registration.php">Register</a></div>
     </div>
     <?php
         if(isset($message)) {
