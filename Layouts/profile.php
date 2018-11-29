@@ -5,7 +5,7 @@
     session_start();
     
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        include_once '../Scripts/getUserInfo.php';
+        include '../Scripts/getUserInfo.php';
     }
     else {
         header('location: ./login.php');
@@ -30,6 +30,8 @@
   src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
   integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="
   crossorigin="anonymous"></script>
+  <!-- JQuery Parsley validator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.js"></script>
   <link rel="stylesheet" href="../Styles/styles.css">
   <link rel="stylesheet" href="../Styles/profile.css">
   <!-- MAYBE RENAME THIS SCRIPT! -->
@@ -39,7 +41,13 @@
 <body>
   <?php
     include 'navbar.php';
-  ?><br>
+  ?>
+  <!-- On successful update -->
+  <div class="collapse" id="success_update">
+      <div class="alert alert-success text-center center-block" role="alert" style="width: 99%; margin-top: 2px;">
+          Records Updated Succesfully
+      </div>
+  </div><br>
 
 
 
@@ -83,140 +91,102 @@
               <button type="submit" name="submit" style="display: none;"></button>
             </label>
           </div>
-
-          <!-- <div class="row">
-            <label class="btn btn-info btn-file ">
-                Browse <input type="file" style="display: none;">
-            </label>
-          </div> -->
-          
-          <!-- <div class="form-group col-md-4">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Change Profile Picture</button>
-          </div> -->
-          <!-- <div class="form-group col-md-4">
-            <input type="file" class="btn btn-light btn-lg btn-block" name="fileToUpload" id="fileToUpload">
-          </div> -->
-          
+                    
         </form>
       </div>
 
       <!-- Right side: Actual info, edit text fields etc -->
       <div class="col-sm-8 right">
 
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="user_form">
-            <!-- First Name -->
-            <div class="form-group col-md-7">
-                  <input type="text" class="form-control" name="first_name" title="Only letters allowed" value="<?php echo $first_name;?>"
-                  placeholder="First Name" pattern="^[A-Za-zÀ-ÿ ,.'-]+$" required>
-            </div>
-
-            <!-- Last Name -->
-            <div class="form-group col-md-7">
-                  <input type="text" class="form-control" name="last_name" title="Only letters allowed" value="<?php echo $last_name;?>"
-                  placeholder="Last Name" pattern="^[A-Za-zÀ-ÿ ,.'-]+$" required>
-            </div>
-
-            <!-- Email -->
-            <div class="form-group col-md-7">
-                <input type="email" class="form-control" name="email" placeholder="Email" required value="<?php echo $email;?>">
-            </div>
-
-            <!-- Date of Birth -->
-            <div class="form-group col-md-7">
-                <input type="text" class="form-control" name="date_picker" id="date_picker" placeholder="Date of Birth" autocomplete="off" value="<?php echo $dob;?>">
-            </div>
-
-            <!-- Old Password -->
-            <div class="form-group col-md-7">
-                <input type="password" class="form-control" name="password_old" id="password_old" placeholder="Old Password"
-                title="Password must be at least 8 characters long and must have at least one upper case and one lower case letter">
-            </div>
-
-            <!-- Password -->
-            <div class="form-group col-md-7">
-                <input type="password" class="form-control" name="password_new" id="password_new" placeholder="New Password" pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*#?&]{8,}$"
-                title="Password must be at least 8 characters long and must have at least one upper case and one lower case letter">
-            </div>
-
-            <!-- Confirm password -->
-            <div class="form-group col-md-7">
-                <input type="password" class="form-control" name="password_confirm_update" id="password_confirm_update" placeholder="Confirm Password" 
-                onfocusout="checkPasswordsOnUpdate()">
-            </div>
-
-            <!-- Update Button -->
-            <div class="form-group col-md-7">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Update</button>
-            </div>
+        <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="user_form"> -->
+        <form id="user_form" data-parsley-validate>
+          <!-- First Name -->
+          <div class="form-group col-md-7">
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="<?php echo $first_name;?>"
+                required=""
+                data-parsley-pattern="^[A-Za-zÀ-ÿ ,.'-]+$" >
+          </div>
+        
+          <!-- Last Name -->
+          <div class="form-group col-md-7">
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" value="<?php echo $last_name;?>"
+                required="" 
+                data-parsley-pattern="^[A-Za-zÀ-ÿ ,.'-]+$">
+          </div>
+        
+          <!-- Email -->
+          <div class="form-group col-md-7">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email@Example.com" value="<?php echo $email;?>"
+              required="">
+          </div>
+        
+          <!-- Date of Birth -->
+          <!-- <div class="form-group col-md-7">
+              <input type="text" class="form-control" name="date_picker" id="date_picker" placeholder="Date of Birth" autocomplete="off" value="<?php echo $dob;?>">
+          </div> -->
+        
+          <!-- Old Password -->
+          <div class="form-group col-md-7">
+              <input type="password" class="form-control" name="password_old" id="password_old" placeholder="Old Password"
+              data-parsley-pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*#?&]{8,}$"
+              title="Password must be at least 8 characters long and must have at least one upper case and one lower case letter">
+          </div>
+        
+          <!-- New Password -->
+          <div class="form-group col-md-7">
+              <input type="password" class="form-control" name="password_new" id="password_new" placeholder="New Password" 
+              data-parsley-pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*#?&]{8,}$"
+              title="Password must be at least 8 characters long and must have at least one upper case and one lower case letter">
+          </div>
+        
+          <!-- Confirm password -->
+          <div class="form-group col-md-7">
+              <input type="password" class="form-control" name="password_confirm_update" id="password_confirm_update" placeholder="Confirm Password"
+              data-parsley-equalto="#password_new"
+              title="Match this field with the new password">
+          </div>
+        
+          <!-- Update Button -->
+          <div class="form-group col-md-7">
+              <button type="submit" class="btn btn-success btn-lg btn-block" id="update_button">Update</button>
+          </div>
         </form>
 
+        <!-- Delete Button -->
+        <div class="form-group col-md-7">
+            <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#confirmation" id="deleting_button">
+              Delete
+            </button>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmation" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete User</h4>
+              </div>
+              <div class="modal-body">
+                <p>This action will remove current user completely. Are you sure?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="delete_button">Delete User</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
         <!-- Orders. Hidden or shown on button click -->
-        <div id="orders_table">
+        <div id="orders_table" hidden>
           <?php 
-            include_once '../Scripts/getOrders.php';
+            include '../Scripts/getOrders.php';
           ?>
         </div>
-        
-        <!-- <table id="orders_table">
-          <tr>
-            <th>Education</th>
-            <th>Year</th>
-            <th>Grade</th>
-          </tr>
-          <?php
-            // Fetch all user's orders
-            // $orders = $conn->query("SELECT * FROM orders WHERE user_id = '$user_id'");
-            $orders = $conn->query("SELECT * FROM orders WHERE user_id = 2");
-
-            foreach ($orders as $order) {
-                echo '<tr>';
-                echo '<td>'.$order['in_basket'].'</td>';
-                echo '<td>'.$order['order_amount'].'</td>';
-                echo '<td>'.$order['product_id'].'</td>';
-                echo '</tr>';
-            }
-          ?>
-        </table> -->
-    </div>
-
-        <?php
-          
-          if ($_SERVER['REQUEST_METHOD'] == 'POST') { // On submission
-              
-              // Since js/jquery handles the validation, php assumes everything is in order and just handles db actions
-
-              // Sanitize input
-              $first_name = test_input($_POST['first_name']);
-              $last_name = test_input($_POST['last_name']);
-              $email = test_input($_POST['email']);
-              $password = test_input($_POST['password_new']);
-              
-              // // Returns record with matching email
-              // $account_exists = $conn->query("SELECT * FROM users WHERE email LIKE '$email'");
-              
-              // if ($account_exists->rowCount() === 0) {
-              //     // Prepare insert statement
-              //     $insert = $conn->prepare('INSERT INTO users (first_name, last_name, email, password_hash)
-              //                             VALUES (:first_name, :last_name, :email, :password_hash)');
-              //     $insert->bindParam(':first_name', $first_name);
-              //     $insert->bindParam(':last_name', $last_name);
-              //     $insert->bindParam(':email', $email);
-              //     // Hash password before storing it
-              //     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-              //     $insert->bindParam(':password_hash', $password_hash);
-                  
-              //     // Send new user to DB
-              //     $insert->execute();
-                  
-              //     // Redirect user to login page
-              //     header('Location: ../Layouts/login.php?message=successful');
-              // }
-              // else {
-              //     echo "<script>alert('Account with that email already exists');</script>";
-              // }
-          }
-        ?>
-
       </div>
     </div>
   </div>

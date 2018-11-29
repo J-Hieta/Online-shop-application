@@ -3,7 +3,7 @@ function fromRegistration(message) {
     if (message === 'successful') {
         // Show alert and slide it smoothly after some seconds
         const success = $('#success_alert');
-        success.show();
+        success.slideDown('slow');
         setTimeout(() => {
             success.slideUp('slow');
         }, 2500);
