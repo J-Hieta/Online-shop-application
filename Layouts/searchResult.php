@@ -6,22 +6,28 @@ $category = "";
 $input = "";
 $minP = "";
 $maxP = "";
-  if(isset($_GET['category'])) {
+
+$query = "SELECT * FROM products WHERE product_name LIKE ";
+
+if (isset($_GET['input'])) {
+    $input = test_input($_GET['input']);
+    $query = $query."'%".$input."%'";
+}
+if(isset($_GET['category']) && $_GET['category'] !== '') {
     $category = test_input($_GET['category']);
-  }
+    $query = $query." AND category LIKE '".$category."'";
+}
+if(isset($_GET['minP'])  && $_GET['minP'] !== '') {
+    $minP = test_input($_GET['minP']);
+    $query = $query.' AND product_price >= '.$minP;
+}
+if(isset($_GET['maxP'])  && $_GET['maxP'] !== '') {
+    $maxP = test_input($_GET['maxP']);
+    $query = $query.' AND product_price <= '.$maxP;
+}
 
-  if (isset($_GET['input'])) {
-      $input = test_input($_GET['input']);
-  }
-  if(isset($_GET['minP'])) {
-      $minP = test_input($_GET['minP']);
-  }
-  if(isset($_GET['maxP'])) {
-      $maxP = test_input($_GET['maxP']);
-  }
+  $pProduct = $conn->query($query);  
 
-  $pProduct = $conn->query("SELECT * from products WHERE category like '$category' and product_name like '%$input%' and product_price >= '$minP' and product_price <= '$maxP'");
-  
 ?>
 <!DOCTYPE html>
 <html lang="en">

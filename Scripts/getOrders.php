@@ -25,15 +25,15 @@
       echo '<h3>Looks like you have not ordered anything. All your orders will appear here</h3>'; 
     }
     else {
-      echo '<div class="orders">';
-      echo '<table>';
-      echo '<tr>';
-      echo '<th>Name</th>';
-      echo '<th>Category</th>';
-      echo '<th>Price</th>';
-      echo '<th>Quantity</th>';
-      echo '<th></th>';
-      echo '</tr>';
+      echo '<div class="orders">
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th></th>
+                </tr>';
 
       foreach ($orders as $order) {
         // Fetch each product's information
@@ -42,11 +42,11 @@
         $product = $conn->query("SELECT * FROM products WHERE product_id = '$product_id'")->fetch();
 
         echo '<tr>';
-        echo '<td><a>'.$product['product_name'].'</a></td>';
-        echo '<td><a>'.$product['category'].'</a></td>';
+        echo '<td>'.$product['product_name'].'</td>';
+        echo '<td>'.$product['category'].'</td>';
         echo '<td>'.$product['product_price'].'€</td>';
         echo '<td>'.$order['order_amount'].'</td>';
-        echo '<td><a><img src="'.$product['product_image_path'].'" alt="Product image" /></a></td>';
+        echo '<td><img src="'.$product['product_image_path'].'" alt="Product image" /></td>';
         echo '</tr>';
       }
 
