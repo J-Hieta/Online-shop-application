@@ -1,0 +1,71 @@
+.table td {
+    cursor: pointer;
+    text-align: center;
+}
+
+.img-rounded {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.left {
+    /* background-color: aqua; */
+}
+
+.left img {
+    /* Center image in div */
+    display: flex;
+    margin: 0 auto;
+    /* Now right side won't come on top of profile picture: */
+    height: 100%;
+    width: 100%;
+}
+
+.right {
+    /* background-color: brown; */
+}
+.row {
+    /* Using flex will automatically make rows to be the same height */
+    display: flex;
+    margin: 0 auto;
+}
+
+.orders table {
+    width: 60%;
+}
+  
+.orders th, .orders td {
+    border: 1px solid black;
+    overflow: hidden;
+    padding: 1%;
+    text-align: center;
+    width: 10%;
+}
+
+.orders td img {
+    max-height: 50px;
+}
+
+.orders a {
+    cursor: pointer;
+}
+
+/* .btn-info {
+    position: relative;
+    overflow: hidden;
+}
+.btn-info input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+} */
