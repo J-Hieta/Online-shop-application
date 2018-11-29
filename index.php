@@ -1,0 +1,1 @@
+<?php header('location: ../Layouts/index.php'); ?>
