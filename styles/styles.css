@@ -35,7 +35,7 @@ table td {
   height: 22px;
 }
 
-input, select {
+#search input, #search select {
   box-sizing: content-box;
   -ms-box-sizing:content-box;
   -moz-box-sizing:content-box;
