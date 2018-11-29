@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php">Home</a></li>
-          <li><span id="items_in_cart"></span> <a href="../Layouts/cart.php" ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          <li><span id="items_in_cart"></span> <a href="../Layouts/cart.php" style="cursor: pointer" ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           
