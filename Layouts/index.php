@@ -102,7 +102,7 @@ session_start();
   </div>
   <div class="row ">
     <div style=" margin-right: auto" class="col-sm-2 sidenav hidden-xs">
-      <table class="table table-striped table-bordered table-inverse">
+      <table  class="table category-navbar table-bordered table-inverse">
         <thead>
           <th>Categories</th>
         </thead>
@@ -122,14 +122,30 @@ session_start();
               <a id="Accessories" onclick="getProducts('#Accessories')">Accessories</a>
             </td>
           </tr>
+          <tr>
+            <td>
+              <a onClick="getProducts('#All')" id="All">All</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
       <!-- Product images, to be added in javascript -->
-      <div id="products-parent" style="margin-left: auto" class="col-sm-10">
+      <div id="products-parent" style="margin-left: 5% ; width: 70% ; display: inline-block ; float: left" class="col-sm-10">
         <?php
+        if(isset($_GET['category']) && $_GET['category'] != 'All') {
           include '../Scripts/getProducts.php';
+        }
+        else if(isset($_GET['category']) && $_GET['category'] == 'All') {
+          $pProduct = $conn->query("SELECT * from products");
+          include '../Scripts/getproducts.php';
+        }
+        else {
+          $pProduct = $conn->query("SELECT * from products ORDER BY RAND() LIMIT 6");
+          include '../Scripts/getproducts.php';
+        }
+          
         ?>
     </div>
   </div>

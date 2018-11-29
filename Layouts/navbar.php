@@ -1,5 +1,5 @@
 <!-- Standalone navbar file to be called on any page that requires it. -->
-<nav class="navbar navbar-inverse">
+<nav class="navbar" style="background-color: ">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -11,8 +11,8 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="index.php">Home</a></li>
-          <li><span id="items_in_cart"></span> <a href="../Layouts/cart.php" style="cursor: pointer" ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          <li class="active "><a class="navtext" href="index.php">Home</a></li>
+          <li  ><span ></span> <a class="navtext" href="../Layouts/cart.php" style="cursor: pointer" ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           
@@ -28,12 +28,12 @@
                         echo '<li><h4 style="color:white">Welcome '.$name['first_name'].'</h4></li>';
                     }
 
-                    echo '<li><a href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-                          <li> <a href="./profile.php">My Profile</a></li>';
+                    echo '<li><a class="navtext" href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                          <li> <a class="navtext" href="./profile.php">My Profile</a></li>';
 
                 } else {
-                    echo '<li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-                          <li><a href="./registration.php">Register</a></li>';
+                    echo '<li><a class="navtext" href="./login.php"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+                          <li><a class="navtext" href="./registration.php">Register</a></li>';
                 }                     
             ?>
         </ul>
