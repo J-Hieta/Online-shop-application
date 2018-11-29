@@ -14,12 +14,14 @@ function getProducts(categoryId) {
 function showAdvanced() {
     if ($('#advanced_text').text() === 'Advanced Search') {
         $('#advanced_options').slideDown('slow', () => {
-            $('#advanced_text').text('Hide Advanced Options');
+            $('#advanced_text').text('Hide Advanced Options')
+            .append('<span class="glyphicon glyphicon-collapse-up"></span>');
         });
     }
     else {
         $('#advanced_options').slideUp('slow', () => {
-            $('#advanced_text').text('Advanced Search');
+            $('#advanced_text').text('Advanced Search')
+            .append('<span class="glyphicon glyphicon-collapse-down"></span>');
         });
     }
 }

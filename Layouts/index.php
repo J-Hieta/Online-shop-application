@@ -81,14 +81,18 @@ session_start();
   <h3 align="center">Products</h3><br>
   <div align="center" style="padding: 5px" class="search">
 
-  <!-- Advanced search -->
   <form id="search" method="post">
   <div class="form input-group">
-    <input required name="input" value="" id="search-input" type="text">
-    <button id="search_button" class="btn btn-success" type="submit" name="searchButton" value="submit">Search</button>
-    <a role="button" onclick="showAdvanced()" id="advanced_text" style="margin-left: 1%;">Advanced Search</a>
+    <!-- Basic Search -->
+    <div class="row">
+      <input required name="input" value="" id="search-input" type="text">
+      <button id="search_button" class="btn btn-success" type="submit" name="searchButton" value="submit">Search</button>
+      <a role="button" onclick="showAdvanced()" id="advanced_text">Advanced Search<span class="glyphicon glyphicon-collapse-down"></span></a>
+    </div>
+
+    <!-- Advanced search -->
     <div class="row" id="advanced_options" hidden><br>
-    <select name="category" name="search-category" id="search-category">
+      <select name="category" name="search-category" id="search-category">
         <option value="">Select category</option>
         <option value="computers">Computers</option>
         <option value="phones">Phones</option>
