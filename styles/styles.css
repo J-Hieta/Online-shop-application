@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */ 
 .navbar {
    margin-bottom: 0;
@@ -6,12 +10,6 @@
    background: linear-gradient(to bottom, rgba(228,245,252,1) 0%,rgba(191,232,249,1) 50%,rgba(159,216,239,1) 51%,rgba(42,176,237,1) 100%);
 }
 
-  
- /* Add a gray background color and some padding to the footer */
-footer {
-    background-color: #f2f2f2;
-    padding: 25px;
-}
   
 .carousel-inner img {
     width: 70%; /* Set width to 70% */
@@ -35,4 +33,21 @@ img {
   position: relative;
   top: 0; bottom:0; left: 0; right:0;
   margin: auto;
+}
+
+#search select {
+  height: 25px;
+  margin-right: 3%;
+  margin-bottom: 5%;
+}
+
+#search input {
+  height: 22px;
+}
+
+#search input, #search select {
+  box-sizing: content-box;
+  -ms-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box; 
 }

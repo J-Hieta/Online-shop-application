@@ -81,20 +81,27 @@ session_start();
   <h3 align="center">Products</h3><br>
   <div align="center" style="padding: 5px" class="search">
 
-  <!-- Advanced search -->
   <form id="search" method="post">
   <div class="form input-group">
-    <input required name="input" value="" id="search-input" type="text">
-    <select required name="category" name="search-category" id="search-category">
+    <!-- Basic Search -->
+    <div class="row">
+      <input required name="input" value="" id="search-input" type="text">
+      <button id="search_button" class="btn btn-success" type="submit" name="searchButton" value="submit">Search</button>
+      <a role="button" onclick="showAdvanced()" id="advanced_text">Advanced Search<span class="glyphicon glyphicon-collapse-down"></span></a>
+    </div>
+
+    <!-- Advanced search -->
+    <div class="row" id="advanced_options" hidden><br>
+      <select name="category" name="search-category" id="search-category">
         <option value="">Select category</option>
         <option value="computers">Computers</option>
         <option value="phones">Phones</option>
         <option value="accessories">Accessories</option>
       </select>
-      <input required name="minP" value="" id="min-price" type="text" placeholder="min price" size="5" maxlength="5">
+      <input name="minP" value="" id="min-price" type="text" placeholder="min price" size="5" maxlength="5">
       -
-      <input required name="maxP" value="" id="max-price" type="text" placeholder="max price" size="5" maxlength="5">
-    <button id="search_button" class="btn btn-success" type="submit" name="searchButton" value="submit">Search</button>
+      <input name="maxP" value="" id="max-price" type="text" placeholder="max price" size="5" maxlength="5">
+    </div>
   </div>
   </form>
   
